@@ -1,0 +1,105 @@
+swagger: "2.0"
+info:
+  description: "This is a sample swagger."
+  version: "1.0.0"
+  title: "Swagger node essential"
+  contact:
+    email: "jdrodriguez623@outlook.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "localhost:3333"
+basePath: "/api/v1"
+tags:
+  - name: "hello"
+    description: "Simple hello"
+    externalDocs:
+      description: "Find out more"
+      url: "http://swagger.io"
+schemes:
+  - "http"
+paths:
+  /hello:
+    get:
+      tags:
+        - "hello"
+      summary: "Hello message"
+      description: ""
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Hello"
+  /generateCode:
+    get:
+      tags:
+        - "Generate Code"
+      summary: "Generate 6 digits code unique for the user."
+      description: ""
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/GeneratedCode"
+  /createConcent:
+    post:
+      tags:
+        - "Create a new Concent"
+      summary: "Create a new concent request"
+      description: ""
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/GenericResponse"
+            
+  /getConcents:
+    post:
+      tags:
+        - "Get the list of concents for a single User"
+      summary: "Get the list of concents for a single User"
+      description: ""
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/GenericResponse"
+definitions:
+  Hello:
+    type: "object"
+    properties:
+      title:
+        type: "string"
+      message:
+        type: "string"
+  GeneratedCode:
+    type: "object"
+    properties:
+      title:
+        type: "string"
+      code:
+        type: "string"
+   GenericResponse:
+    type: "object"
+    properties:
+      code:
+        type: "string"
+      message:
+        type: "string"
+  
