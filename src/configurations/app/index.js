@@ -12,10 +12,15 @@ const setUp = require('../setup');
 const setDocs = require('../documentation');
 const setRoutes = require('../routes');
 const setHandlers = require('../handlers');
+const setDatabase = require('../database');
+const setBodyParser = require('../bodyParser');
+
 
 setUp(app);
 setDocs(app);
 setRoutes(app);
 setHandlers(app);
+//setDatabase(app);
+setBodyParser(app);
 
 module.exports = app;

@@ -5,6 +5,6 @@ module.exports = class User {
         this.lastName = lastName;
         this.email = email;
         this.consentCode = consentCode,
-        this.consentCodeDate = consentCode
+        this.consentCodeDate = consentCodeDate
     }
 };
