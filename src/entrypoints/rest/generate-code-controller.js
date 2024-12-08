@@ -1,14 +1,20 @@
 const { repository } = require('../../dataproviders/repositories/code-repository');
-const { userRepository } = require('../../dataproviders/repositories/user-repository');
+const { updateUser } = require('../../dataproviders/repositories/user-repository');
 
 exports.controller = async (req, res) => {
-    const user = await userRepository();
-    const code = await repository(userCode = user.consentCode);
-    if (code != null) {
-        user.consentCode = code
-        user.consentCodeDate = Date()
-    }
+    const { id } = req.query;
+    var response = {
+        msg: '',
+        errorCode: '500',
+    };
+    response = await updateUser(
+        {
+            _id: id,
+        },
+        { consentCode: await repository(), consentCodeDate: Date() }
+    );
+
     return res.json({
-        user,
+        response,
     });
 };

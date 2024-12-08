@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Concent = new mongoose.Schema({
+const Consent = new mongoose.Schema({
   date: {
     type: String,
     required: true,
@@ -17,4 +17,4 @@ const Concent = new mongoose.Schema({
     required: true,
   }
 })
-module.exports = mongoose.model('Concent',Concent);
+module.exports = mongoose.model('Consent',Consent);

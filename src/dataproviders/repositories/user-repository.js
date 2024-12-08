@@ -1,12 +1,63 @@
-const { User } = require('../../commons/user');
-
 const ConsentUser = require('../../dataproviders/database/models/userSchema');
 
-exports.userRepository = async () => {
-    return new User("JUAN", "JUAN", "JUAN", "JUAN", "5", "JUAN")
-}
+exports.createUser = async (
+    name,
+    lastName,
+    email,
+    password,
+    consentCode,
+    consentCodeDate,
+    status
+) => {
+    try {
+        const user = new ConsentUser({ name, lastName, email, 
+            password: password,
+            consentCode: email,
+            consentCodeDate: 'NA',
+            status: "A"
+          });
+        await user.save();
+    } catch (error) {
+        return {
+            msg: error,
+            errorCode: '500',
+        };
+    }
+};
 
+exports.findUser = async filters => {
+    try {
+        return ConsentUser.findOne(
+            filters //{ name: 'John Doe' }, // Filter
+        );
+    } catch (error) {
+        return {
+            msg: error,
+            errorCode: '500',
+        };
+    }
+};
 
-exports.findUser = async () => {
-    return new User("23654789", "DAVID", "BOWIE", "alphabeto623@gmail.com", "123456", "555666", "23654789")
-}
+exports.updateUser = async (filter, update) => {
+    try {
+        const val = await ConsentUser.updateOne(filter, { $set: update })
+        if(val.modifiedCount == 0){
+            return {
+                msg: 'Intentelo nuevamente',
+                errorCode: '400',
+            }
+        }
+        return response = {
+            msg: 'Codigo generado exitosamente',
+            errorCode: '000',
+            code: update.consentCode
+        };
+
+    } catch (error) {
+        return {
+            msg: error,
+            errorCode: '500',
+        };
+    }
+
+};

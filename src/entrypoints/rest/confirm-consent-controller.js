@@ -1,14 +1,14 @@
-const { updateConsentRepository, getConsentRepository } = require('../../dataproviders/repositories/concent-repository');
+const { updateConsentRepository, getConsentRepository } = require('../../dataproviders/repositories/consent-repository');
 const { findUser} = require('../../dataproviders/repositories/user-repository')
 exports.controller = async (req, res) => {
     var response = {
         msg: 'Error',
         errorCode: '400',
     }
-    const concent = await updateConsentRepository([{id: req.body.consentId }]);
+    const consent = await updateConsentRepository([{_id: req.body.consentId }]);
     const user = await findUser([{consentCode: req.body.consentCode }])
 
-    if(user.id == consent.id_user_s || user.id == consent.id_user_r){
+    if(user._id == consent.id_user_s || user._id == consent.id_user_r){
         const updateFilters = {id: req.body.consentId };
         const update = {status: "SV"};
         if(consent.status == "SV" ){

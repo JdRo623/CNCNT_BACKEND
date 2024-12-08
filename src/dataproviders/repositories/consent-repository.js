@@ -1,4 +1,4 @@
-const Concent = require('../database/models/concentSchema');
+const Consent = require('../database/models/consentSchema');
 
 exports.createConsentRepository = async req => {
     var response = {
@@ -6,14 +6,14 @@ exports.createConsentRepository = async req => {
         errorCode: '400',
     };
 
-    const concent = new Concent({
+    const consent = new Consent({
         date: Date(),
         id_user_s: req.id_user_s,
         id_user_r: req.id_user_r,
         status: 'FV',
     });
     try {
-        await concent.save().then(val => {
+        await consent.save().then(val => {
             response = {
                 msg: 'Consentimiento creado exitosamente',
                 errorCode: '000',
@@ -22,7 +22,7 @@ exports.createConsentRepository = async req => {
     } catch (error) {
         response = {
             msg: 'Error: ' + error,
-            errorCode: '400',
+            errorCode: '500',
         };
     }
 
@@ -35,13 +35,13 @@ exports.getConsentRepository = async filters => {
         errorCode: '400',
     };
     try {
-        response = await Concent.find({
+        response = await Consent.find({
             $or: filters,
         })
     } catch (error) {
         response = {
             msg: 'Error: ' + error,
-            errorCode: '400',
+            errorCode: '500',
         };
     }
     return response;
@@ -53,7 +53,7 @@ exports.updateConsentRepository = async (filter, update) => {
         errorCode: '400',
     };
     try {
-        await Concent.updateOne(
+        await Consent.updateOne(
             filter,//{ name: 'John Doe' }, // Filter
             { $set: update/*{ email: 'john.doe@newdomain.com' } */} // Update
         ).then(val => {
@@ -64,8 +64,8 @@ exports.updateConsentRepository = async (filter, update) => {
         });
     } catch (error) {
         response = {
-            msg: 'Error: ' + error,
-            errorCode: '400',
+            msg: error,
+            errorCode: '500',
         };
     }
 
