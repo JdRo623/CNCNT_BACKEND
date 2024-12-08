@@ -20,7 +20,7 @@ setUp(app);
 setDocs(app);
 setRoutes(app);
 setHandlers(app);
-//setDatabase(app);
+setDatabase(app);
 setBodyParser(app);
 
 module.exports = app;

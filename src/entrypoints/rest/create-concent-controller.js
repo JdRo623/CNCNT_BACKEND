@@ -1,16 +1,17 @@
-const { repository } = require('../../dataproviders/repositories/code-repository');
-
+const { createConsentRepository } = require('../../dataproviders/repositories/concent-repository');
+const { findUser } = require('../../dataproviders/repositories/user-repository');
 exports.controller = async (req, res) => {
-    const code = await repository();
+    var response = {
+        msg: 'Error',
+        errorCode: '400',
+    };
 
-    //TODO: Obtener el codigo ingresado
-    //TODO: Obtener el id del usuario y consultar su informacion
-    //TODO: Encontrar el usuario al cual pertenece el codigo ingresado
-    //TODO: Crear el consentimiento con la informacion de ambos usuarios y almacenarlo en la base de datos
-    //TODO: Regresar el aprobado al usuario si todo salio bien
-    //TODO: POSIBLEMENTE NOTIFICAR AL SEGUNDO USUARIO DE LA INTENT
-    
-    return res.json({        
-        code,
-    });
+    user = await findUser(req.body.concentCode)
+    var consentInfo = {
+        id_user_s: req.body.id_user_s,
+        id_user_r: user.id,
+    }
+    response = await createConsentRepository(consentInfo);
+
+    return res.json(response);
 };

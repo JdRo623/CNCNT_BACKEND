@@ -1,14 +1,9 @@
 const { getConsentRepository } = require('../../dataproviders/repositories/concent-repository');
-const { userRepository } = require('../../dataproviders/repositories/code-repository');
 
 exports.controller = async (req, res) => {
-    const concentList = await getConsentRepository(userCode);
-
-    //TODO: Obtener el id del usuario y consultar su informacion
-    //TODO: Buscar los consentimientos con el id del usuario
-    //TODO: Regresar la lista vacia si no encontro nada
-    
-    return res.json({        
+    const filters = [{ id_user_s: req.body.userCode }, { id_user_r: req.body.userCode }];
+    const concentList = await getConsentRepository(filters);
+    return res.json({
         concentList,
     });
 };

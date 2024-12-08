@@ -1,10 +1,5 @@
 const mongoose = require('mongoose');
-const userSchema = new mongoose.Schema({
-  id: {
-    type: String,
-    required: true,
-    unique: true,
-  },
+const Concent = new mongoose.Schema({
   date: {
     type: String,
     required: true,
@@ -17,9 +12,9 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  status: {
-    type: String,
+  status: { //FV: FIRST_VALIDATION - SV: SECOND_VALIDATION - R - A
+    type: String, 
     required: true,
   }
 })
-module.exports = mongoose.model('Emp',userSchema);
+module.exports = mongoose.model('Concent',Concent);
