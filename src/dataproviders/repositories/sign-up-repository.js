@@ -2,8 +2,11 @@ const ConsentUser = require('../database/models/userSchema');
 const {passwordRepository} = require('./password-repository');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const {sendEmail} = require('../../commons/util/sendEmail');
+
 
 exports.signUpRepository = async req => {
+
     try {
         const { name, lastName, email } = req.body;
         const password = await passwordRepository()
@@ -15,8 +18,9 @@ exports.signUpRepository = async req => {
             status: "A"
           });
         await user.save();
+        await sendEmail(email,"Bienvenido a Consent",{name: user.name,password: password},"./template/passwordSignUp.handlebars")
+
         return {
-            password: password,
             msg: 'User registered successfully',
             errorCode: '201',
         }

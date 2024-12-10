@@ -1,5 +1,5 @@
-const { controller } = require('../../entrypoints/rest/hello-controller');
+const { controller } = require('../../entrypoints/rest/recover-password-controller');
 
 module.exports = router => {
-    router.get('/hello', controller);
+    router.post('/recoverPassword', controller);
 };

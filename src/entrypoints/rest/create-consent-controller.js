@@ -9,7 +9,7 @@ exports.controller = async (req, res) => {
     user = await findUser({consentCode: req.body.consentCode})
     var consentInfo = {
         id_user_s: req.body.id_user_s,
-        id_user_r: user.id,
+        id_user_r: user._id,
     }
     response = await createConsentRepository(consentInfo);
 

@@ -47,6 +47,20 @@ exports.getConsentRepository = async filters => {
     return response;
 };
 
+exports.getOneConsentRepository = async filter => {
+    try {
+        return Consent.findOne(
+            filter //{ name: 'John Doe' }, // Filter
+        );
+    } catch (error) {
+        return {
+            msg: error,
+            errorCode: '500',
+        };
+    }
+};
+
+
 exports.updateConsentRepository = async (filter, update) => {
     var response = {
         msg: 'Error',

@@ -3,15 +3,17 @@ const handlebars = require("handlebars");
 const fs = require("fs");
 const path = require("path");
 
-const sendEmail = async (email, subject, payload, template) => {
+exports.sendEmail = async (email, subject, payload, template) => {
   try {
     // create reusable transporter object using the default SMTP transport
     const transporter = nodemailer.createTransport({
-      host: process.env.EMAIL_HOST,
+      service: "Gmail",
+      host: "smtp.gmail.com",
+      secure: true,
       port: 465,
       auth: {
-        user: process.env.EMAIL_USERNAME,
-        pass: process.env.EMAIL_PASSWORD, // naturally, replace both with your real credentials or an application-specific password
+        user: "consent.dev.es@gmail.com",
+        pass: "jqwb xrty nfcu bzcq", // naturally, replace both with your real credentials or an application-specific password
       },
     });
 
@@ -51,4 +53,4 @@ sendEmail(
 );
 */
 
-module.exports = sendEmail;
+//module.exports = sendEmail;

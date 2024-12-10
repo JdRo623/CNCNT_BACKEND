@@ -1,5 +1,5 @@
-const { controller } = require('../../entrypoints/rest/hello-controller');
+const { controller } = require('../../entrypoints/rest/reject-consent-controller');
 
 module.exports = router => {
-    router.get('/hello', controller);
+    router.post('/rejectConsent', controller);
 };
